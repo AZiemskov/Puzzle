@@ -93,9 +93,17 @@ bool Gameboard::move(int index)
     if(!isAdjacent(elementPosition, hiddenElementPosition)){
         return false;
     }
+    int boardIndex = 0;
     std::swap(hiddenElementIterator->value, m_rawBoard[index].value);
-    emit dataChanged(createIndex(0,0), createIndex(m_boardSize,0));
     moveNumberChanged(++m_moveNumber);
+    while(boardIndex!=static_cast<int>(m_rawBoard.size()) && (boardIndex == static_cast<int>(m_rawBoard[boardIndex].value))){
+           boardIndex++;
+           if(boardIndex == static_cast<int>(m_rawBoard.size()-1)){
+               QMessageBox msgBox;
+               msgBox.setText("You are win.");
+               msgBox.setStandardButtons(QMessageBox::Ok);
+           }
+    }
     return true;
 }
 
@@ -109,6 +117,7 @@ bool Gameboard::isAdjacent(const Gameboard::Position f, const Gameboard::Positio
     if(f == s){
        movebleChanged(m_moveble = false);
        directionChanged(m_direct = STAND);
+       qDebug() << "something else";
        return false;
     }
     const auto calcDistance = [](const size_t pos1, size_t pos2){
@@ -153,6 +162,7 @@ bool Gameboard::isAdjacent(const Gameboard::Position f, const Gameboard::Positio
     if(!result){
         directionChanged(m_direct = STAND);
     }
+    qDebug() << result;
     movebleChanged(m_moveble = result);
     return result;
 }

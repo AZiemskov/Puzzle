@@ -8,7 +8,6 @@ GridView {
     }
 
 
-
     header: Rectangle {
        id: headerId
         height: 50
@@ -60,22 +59,26 @@ GridView {
             anchors.fill: parent
             onClicked: {
                root.model.move(index)
-                /*if(checkMoving()){
+                if(checkMoving()){
                    var dir = checkDirection()
                     if(dir === 1){
                         left.start()
                         console.log("left")
+                        console.log(bgDelegate.x)
                     } else if(dir === 2){
                         right.start()
                         console.log("right")
+                        console.log(bgDelegate.x)
                     } else if (dir === 3){
                         up.start()
                         console.log("up")
+                        console.log(bgDelegate.y)
                     } else if (dir === 4){
                         down.start()
                         console.log("down")
+                        console.log(bgDelegate.y)
                     }
-                }*/
+                }
             }
             NumberAnimation{
                 id: right

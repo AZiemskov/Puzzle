@@ -3,6 +3,9 @@
 #include <QAbstractListModel>
 #include <vector>
 #include <QPropertyAnimation>
+#include <QMessageBox>
+
+
 class Gameboard : public QAbstractListModel
 {
     Q_OBJECT
